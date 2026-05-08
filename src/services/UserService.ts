@@ -32,5 +32,11 @@ export class UserService {
     getAllUsers = () => {
         return this.db
     }
+
+    deleteUser = (name: string): boolean => {
+        const initialLength = this.db.length
+        this.db = this.db.filter(user => user.name !== name)
+        return this.db.length < initialLength
+    }
 }
 

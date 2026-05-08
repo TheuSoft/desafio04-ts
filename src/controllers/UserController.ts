@@ -17,8 +17,28 @@ export class UserController {
             return response.status(400).json({ message: 'Bad request! Name obrigatório'})
         }
 
+        if(!user.email){
+            return response.status(400).json({ message: 'Bad request! Email obrigatório'})
+        }
+
         this.userService.createUser(user.name, user.email)
         return response.status(201).json({ message: 'Usuário criado'})
+    }
+
+    deleteUser = (request: Request, response: Response): Response => {
+        const { name } = request.body
+
+        if(!name){
+            return response.status(400).json({ message: 'Bad request! Name obrigatório'})
+        }
+
+        const isDeleted = this.userService.deleteUser(name)
+
+        if(!isDeleted){
+            return response.status(404).json({ message: 'Usuário não encontrado'})
+        }
+
+        return response.status(200).json({ message: 'Usuário deletado'})
     }
 
     getAllUsers = (request: Request, response: Response) => {

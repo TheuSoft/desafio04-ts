@@ -102,6 +102,13 @@ export default {
   // A preset that is used as a base for Jest's configuration
   preset: "ts-jest",
 
+  // Specify the globals configuration
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.spec.json'
+    }
+  },
+
   // Run tests from one or more projects
   // projects: undefined,
 
